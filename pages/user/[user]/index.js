@@ -1,16 +1,18 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
-const useUser = () => ({ user: hasan, loading: false});
+// Mock user data
+const useUser = () => ({ user: { name: "Hasan" }, loading: false });
 
 const UserIndex = () => {
   const router = useRouter();
   const user = useUser();
 
   useEffect(() => {
-    if(user.user == null){
-        router.replace("/")
-    }},[])
+    if (user.user == null) {
+      router.replace("/");
+    }
+  }, [router, user.user]);
 
   return (
     <div>
@@ -19,18 +21,14 @@ const UserIndex = () => {
         onClick={() =>
           router.push({
             pathname: "/user/[user]/settings",
-            query: {user:'Hasan'}})
+            query: { user: "Hasan" },
+          })
         }
       >
         Open Settings page
       </button>
-      <hr></hr>
-      <button
-      onClick={() => router.push("/")}
-      
-      >
-      Go to Home
-      </button>
+      <hr />
+      <button onClick={() => router.push("/")}>Go to Home</button>
     </div>
   );
 };
